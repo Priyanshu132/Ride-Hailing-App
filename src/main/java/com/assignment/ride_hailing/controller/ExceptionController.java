@@ -35,11 +35,11 @@ public class ExceptionController {
     }
 
     @ExceptionHandler(exception = {NotFoundException.class,IllegalAccessException.class, OtpVerificationFailedException.class})
-    public ResponseEntity<ErrorResponse> handleNotFoundException(NotFoundException exception){
+    public ResponseEntity<ErrorResponse> handleNotFoundException(Exception exception){
         ErrorResponse errorResponse = ErrorResponse
                 .builder()
                 .message(exception.getMessage())
                 .build();
-        return ResponseEntity.status(HttpStatus.OK).body(errorResponse);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
     }
 }
